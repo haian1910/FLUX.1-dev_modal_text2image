@@ -16,7 +16,3 @@ else:
     print(f"Error: {response.status_code}")
     print(response.text)
 
-# curl -X POST "https://phunggiahuy159--sd-fastapi-fastapi-app-dev.modal.run/txt2img/" \
-#   -H "Content-Type: application/json" \
-#   -d '{"prompt": "a beautiful sunset over mountains"}' \
-#   --output test.png
