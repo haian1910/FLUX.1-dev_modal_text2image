@@ -1,58 +1,114 @@
-# Modal App
+# 🎨 Multi-Model Image Generation App
 
-This is a simple example project using [Modal](https://modal.com/) for serverless Python execution.
+A simple image generation system with multiple AI models, featuring a FastAPI backend on Modal and a Streamlit frontend.
 
-## 📁 Files
+## 🤖 Available Models
 
-- `app_modal.py` – The main application code using Modal.
-- `test.py` – A test script to verify the Modal function.
+| Model | Quality | Speed | Use Case |
+|-------|---------|-------|----------|
+| **FLUX.1-dev** | Highest | Slowest (30-60s) | Professional artwork |
+| **Stable Diffusion XL** | High | Medium (15-25s) | Balanced quality/speed |
+| **Stable Diffusion 1.5** | Good | Fast (5-10s) | Quick iterations |
+| **SDXL Lightning** | Medium-High | Fastest (2-5s) | Rapid prototyping |
 
----
+## 📁 Project Structure
 
-## ⚙️ Setup Instructions
+```
+multimodel-image-gen/
+├── app_modal.py           # Modal backend with multiple models
+├── streamlit_app.py       # Streamlit frontend UI
+├── test.py               # API testing
+├── requirements.txt      # Python dependencies
+└── README.md            # This file
+```
+
+## ⚙️ Quick Setup
 
 ### 1. Install Dependencies
 
 ```bash
-pip install modal
+pip install -r requirements.txt
 ```
 
-### 2. Log In to Modal
-
-If you haven't already:
+### 2. Configure Modal
 
 ```bash
 modal setup
 ```
 
-Follow the instructions in the terminal to authenticate and set up your account.
+### 3. Set Up Hugging Face Secret
 
-### 3. Set Up Secret
+1. Go to [Modal Dashboard](https://modal.com/secrets)
+2. Create a secret named `huggingface-secret`
+3. Add your HF token: Key: `HF_TOKEN`, Value: Your token from [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
 
-Setup in modal web 
-
-
-## 📝 Write Your App
-
-In `app_modal.py`, define your Modal function.
-
-
----
-
-## 🚀 Deploy the App
-
-Upload and deploy the app to Modal:
+### 4. Deploy Backend
 
 ```bash
 modal deploy app_modal.py
 ```
 
----
+### 5. Update API URL
 
-## 🧪 Run the Test(can skip building app and just run test in order to test sd 1.5 api )
+Copy your Modal URL and update `API_URL` in `streamlit_app.py`.
 
-After deploying, run your test script:
+### 6. Run the App
 
+```bash
+streamlit run streamlit_app.py
+```
+
+Access at: `http://localhost:8501`
+
+## 🧪 Testing
+
+Quick test:
+```bash
+python test.py quick
+```
+
+Full test:
 ```bash
 python test.py
 ```
+
+## 🎯 Usage
+
+### Web Interface
+1. Open the Streamlit app
+2. Select a model
+3. Enter your prompt
+4. Click "Generate Image"
+
+### API Example
+```python
+import requests
+
+response = requests.post(
+    "https://your-modal-url.modal.run/generate/",
+    json={
+        "prompt": "a magical forest",
+        "model": "lightning"
+    }
+)
+
+with open("image.png", "wb") as f:
+    f.write(response.content)
+```
+
+## 🔧 Model Parameters
+
+- **prompt**: Text description (required)
+- **model**: "flux", "sdxl", "sd15", or "lightning" (required)
+- **num_inference_steps**: Denoising steps (optional)
+- **guidance_scale**: Prompt adherence (optional)
+
+## 🐛 Common Issues
+
+**"Model not found":** Ensure Modal app is deployed with `modal deploy app_modal.py`
+
+**Timeout errors:** Try a faster model like Lightning or SD 1.5
+
+**Auth errors:** Check your Hugging Face token in Modal secrets
+
+

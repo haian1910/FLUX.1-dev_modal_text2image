@@ -1,0 +1,10 @@
+# Core dependencies
+streamlit>=1.28.0
+requests>=2.31.0
+Pillow>=10.0.0
+
+# Modal SDK (for local development)
+modal>=0.57.0
+
+# Additional utilities
+python-dotenv>=1.0.0
