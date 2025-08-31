@@ -1,5 +1,5 @@
 # Update 31/8/2025
-Adding 3 more models for the tradeoff between quality and speed instead of only one FLUX-dev model
+Adding 3 more models for the tradeoff between quality and speed, can support multi-models rather than only one FLUX-dev model
 
 # 🎨 Multi-Model Image Generation App
 
