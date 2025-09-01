@@ -1,7 +1,9 @@
 # 🎨 Multi-Model Image Generation App
 
 A simple image generation system with multiple AI models, featuring a FastAPI backend on Modal and a Streamlit frontend.
-
+## Update
+### 31/8/2025: modify to multi-models format
+### 1/9/2025: Adding 3 models 
 ## 🤖 Available Models
 
 | Model | Quality | Speed | Use Case |
